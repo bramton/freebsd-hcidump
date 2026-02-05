@@ -1,0 +1,15 @@
+Maxim Krasnyansky <maxk@qualcomm.com>
+	Original author.
+	Primary maintainer.
+
+Wayne Lee <waynelee@qualcomm.com>
+	RFCOMM parser.
+
+Ricky Yuen <ryuen@qualcomm.com>
+	SDP parser.
+
+Takashi Sasai <sasai@sm.sony.co.jp>
+	BNEP parser.
+
+Marcel Holtmann <marcel@holtmann.org>
+	CMTP parser.

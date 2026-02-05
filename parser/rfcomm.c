@@ -1,0 +1,324 @@
+/* 
+	HCIDump - HCI packet analyzer	
+	Copyright (C) 2000-2001 Maxim Krasnyansky <maxk@qualcomm.com>
+
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License version 2 as
+	published by the Free Software Foundation;
+
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD PARTY RIGHTS.
+	IN NO EVENT SHALL THE COPYRIGHT HOLDER(S) AND AUTHOR(S) BE LIABLE FOR ANY CLAIM,
+	OR ANY SPECIAL INDIRECT OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES WHATSOEVER
+	RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT,
+	NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE
+	USE OR PERFORMANCE OF THIS SOFTWARE.
+
+	ALL LIABILITY, INCLUDING LIABILITY FOR INFRINGEMENT OF ANY PATENTS, COPYRIGHTS,
+	TRADEMARKS OR OTHER RIGHTS, RELATING TO USE OF THIS SOFTWARE IS DISCLAIMED.
+*/
+
+/* 	
+	RFCOMM parser.
+	Copyright (C) 2001 Wayne Lee <waynelee@qualcomm.com>
+*/
+
+/*
+ * Id: rfcomm.c,v 1.6 2002/12/08 00:37:07 holtmann Exp 
+ * $Id: rfcomm.c,v 1.4 2003/09/12 23:38:11 max Exp $
+ */
+
+#include <sys/types.h>
+#include <sys/endian.h>
+#include <stdio.h>
+
+#include "parser.h"
+#include "rfcomm.h"
+
+static char *cr_str[] = {
+	"RSP",
+	"CMD"
+};
+
+#define CR_STR(mcc_head) cr_str[mcc_head->type.cr]
+#define GET_DLCI(addr) ((addr.server_chn << 1) | (addr.d & 1))
+
+void print_rfcomm_hdr(long_frame_head* head, uint8_t *ptr, int len)
+{
+	address_field  addr  = head->addr;
+	uint8_t           ctr   = head->control;
+	uint16_t          ilen  = head->length.bits.len;
+	uint8_t           ctr_type,pf,dlci,fcs;
+
+	dlci     = GET_DLCI(addr);
+	pf       = GET_PF(ctr);
+	ctr_type = CLR_PF(ctr);
+	fcs      = *(ptr + len - 1);
+
+	printf("cr %d dlci %d pf %d ilen %d fcs 0x%x ", addr.cr, dlci, pf, ilen, fcs); 
+}
+
+void print_mcc(mcc_long_frame_head* mcc_head)
+{
+	printf("mcc_len %d\n", mcc_head->length.bits.len);
+}
+
+static void mcc_test(int level, uint8_t *ptr, int len, 
+				long_frame_head *head, 
+				mcc_long_frame_head *mcc_head)
+{
+	printf("TEST %s: ", CR_STR(mcc_head));
+	print_rfcomm_hdr(head, ptr, len);
+	print_mcc(mcc_head);
+}
+static void mcc_fcon(int level, uint8_t *ptr, int len, 
+				long_frame_head *head, 
+				mcc_long_frame_head *mcc_head)
+{
+	printf("FCON %s: ", CR_STR(mcc_head));
+	print_rfcomm_hdr(head, ptr, len);
+	print_mcc(mcc_head);
+}
+
+static void mcc_fcoff(int level, uint8_t *ptr, int len, 
+				long_frame_head *head, 
+				mcc_long_frame_head *mcc_head)
+{
+	printf("FCOFF %s: ", CR_STR(mcc_head));
+	print_rfcomm_hdr(head, ptr, len);
+	print_mcc(mcc_head);
+}
+
+static void mcc_msc(int level, uint8_t *ptr, int len, 
+				long_frame_head *head, 
+				mcc_long_frame_head *mcc_head)
+{
+	msc_msg *msc = (void*) (ptr - STRUCT_END(msc_msg, mcc_s_head));
+
+	printf("MSC %s: ", CR_STR(mcc_head));
+	print_rfcomm_hdr(head, ptr, len);
+	print_mcc(mcc_head);
+	p_indent(level, 0); 
+	printf("dlci %d fc %d rtc %d rtr %d ic %d dv %d",
+		GET_DLCI(msc->dlci), msc->v24_sigs.fc, msc->v24_sigs.rtc, 
+		msc->v24_sigs.rtr, msc->v24_sigs.ic, msc->v24_sigs.dv );
+
+	/* Assuming that break_signals field is _not declared_ in
+	   struct msc_msg... */
+	if (len > 
+	  STRUCT_OFFSET(msc_msg, fcs) - STRUCT_END(msc_msg, v24_sigs)) {
+		break_signals *brk = (break_signals *)
+			(ptr + STRUCT_END(msc_msg, v24_sigs));
+		printf(" b1 %d b2 %d b3 %d len %d\n", 
+			brk->b1, brk->b2, brk->b3, brk->len);
+	}
+	else
+		printf("\n");
+}
+
+static void mcc_rpn(int level, uint8_t *ptr, int len,
+				long_frame_head *head, 
+				mcc_long_frame_head *mcc_head)
+{
+	rpn_msg *rpn = (void*) (ptr - STRUCT_END(rpn_msg, mcc_s_head));
+
+	printf("RPN %s: ", CR_STR(mcc_head));
+	print_rfcomm_hdr(head, ptr, len);
+	print_mcc(mcc_head);
+	printf("dlci %d ", GET_DLCI(rpn->dlci));
+
+	/* Assuming that rpn_val is _declared_ as a member of rpn_msg... */
+	if (len <=
+	  STRUCT_OFFSET(rpn_msg, rpn_val) - STRUCT_END(rpn_msg, mcc_s_head)) {
+		printf("\n");
+		return;
+	}
+
+	printf(" br: %d db: %d sb: %d p: %d pt: %d xi: %d xo: %d\n",
+		rpn->rpn_val.bit_rate, rpn->rpn_val.data_bits, 
+		rpn->rpn_val.stop_bit, rpn->rpn_val.parity,
+		rpn->rpn_val.parity_type, rpn->rpn_val.xon_input,
+		rpn->rpn_val.xon_output);
+	p_indent(level, 0); 
+	printf(" rtri: %d rtro: %d rtci: %d rtco: %d xon: %d xoff: %d pm: %04x\n",
+		rpn->rpn_val.rtr_input, rpn->rpn_val.rtr_output,
+		rpn->rpn_val.rtc_input, rpn->rpn_val.rtc_output,
+		rpn->rpn_val.xon, rpn->rpn_val.xoff,
+		le16toh(*(uint16_t *)&(rpn->rpn_val.pm)));
+}
+
+static void mcc_rls(int level, uint8_t *ptr, int len,
+				long_frame_head *head, 
+				mcc_long_frame_head *mcc_head)
+{
+	rls_msg* rls = (void*) (ptr - STRUCT_END(rls_msg, mcc_s_head));
+
+	printf("RLS %s: ", CR_STR(mcc_head));
+	print_rfcomm_hdr(head, ptr, len);
+	print_mcc(mcc_head);
+	printf("dlci %d error: %d", GET_DLCI(rls->dlci), rls->error);
+}
+
+static void mcc_pn(int level, uint8_t *ptr, int len,
+				long_frame_head *head, 
+				mcc_long_frame_head *mcc_head)
+{
+	pn_msg *pn = (void*) (ptr - STRUCT_END(pn_msg, mcc_s_head));
+
+	printf("PN %s: ", CR_STR(mcc_head));
+	print_rfcomm_hdr(head, ptr, len);
+	print_mcc(mcc_head);
+
+	p_indent(level, 0); 
+	printf("dlci %d frame_type %d credit_flow %d pri %d ack_timer %d "
+		"frame_size %d max_retrans %d credits %d\n",
+		pn->dlci, pn->frame_type, pn->credit_flow, pn->prior,
+		pn->ack_timer, le16toh(pn->frame_size), pn->max_nbrof_retrans, 
+		pn->credits);
+}
+
+static void mcc_nsc(int level, uint8_t *ptr, int len,
+				long_frame_head *head, 
+				mcc_long_frame_head *mcc_head)
+{
+
+	nsc_msg *nsc = (void*) (ptr - STRUCT_END(nsc_msg, mcc_s_head));
+
+	printf("NSC %s: ", CR_STR(mcc_head));
+	print_rfcomm_hdr(head, ptr, len);
+	print_mcc(mcc_head);
+
+	p_indent(level, 0); 
+	printf("cr %d, mcc_cmd_type %x\n", 
+		nsc->command_type.cr, nsc->command_type.type );
+}
+
+static void mcc_frame(int level, struct frame *frm, long_frame_head *head)
+{
+        mcc_short_frame_head *mcc_short_head_p = frm->ptr;
+        mcc_long_frame_head mcc_head;
+        uint8_t hdr_size;
+
+        if ( mcc_short_head_p->length.ea == EA ) {
+                mcc_head.type       = mcc_short_head_p->type;
+                mcc_head.length.bits.len = mcc_short_head_p->length.len;
+                hdr_size = sizeof(mcc_short_frame_head);
+        } else {
+                mcc_head = *(mcc_long_frame_head *)frm->ptr;
+                mcc_head.length.val = le16toh(mcc_head.length.val);
+                hdr_size = sizeof(mcc_long_frame_head);
+        }
+
+        frm->ptr += hdr_size;
+        frm->len -= hdr_size;
+
+	p_indent(level, frm); 
+	printf("RFCOMM(s): ");
+
+	switch (mcc_head.type.type) {
+	case TEST:
+		mcc_test(level, frm->ptr, frm->len, head, &mcc_head);
+		raw_dump(level, frm); 
+		break;
+	case FCON:
+		mcc_fcon(level, frm->ptr, frm->len, head, &mcc_head);
+		break;
+	case FCOFF:
+		mcc_fcoff(level, frm->ptr, frm->len, head, &mcc_head);
+		break;
+	case MSC:
+		mcc_msc(level, frm->ptr, frm->len, head, &mcc_head);
+		break;
+	case RPN:
+		mcc_rpn(level, frm->ptr, frm->len, head, &mcc_head);
+		break;
+	case RLS:
+		mcc_rls(level, frm->ptr, frm->len, head, &mcc_head);
+		break;
+	case PN:
+		mcc_pn(level, frm->ptr, frm->len, head, &mcc_head);
+		break;
+	case NSC:
+		mcc_nsc(level, frm->ptr, frm->len, head, &mcc_head);
+		break;
+	default:
+		printf("MCC message type 0x%02x: ", mcc_head.type.type);
+		print_rfcomm_hdr(head, frm->ptr, frm->len);
+		printf("\n");
+		
+		frm->len--;
+		raw_dump(level, frm); 
+	}
+}
+
+static void uih_frame(int level, struct frame *frm, long_frame_head *head)
+{
+	if (!head->addr.server_chn) {
+		mcc_frame(level, frm, head); 
+	} else {
+		p_indent(level, frm);
+		printf("RFCOMM(d): UIH: ");
+		print_rfcomm_hdr(head, frm->ptr, frm->len);
+
+		if (GET_PF(head->control)) {
+			printf("credits %d ", *(uint8_t *)frm->ptr);
+			frm->ptr++;
+			frm->len--;
+		}
+
+		printf("\n");
+
+		frm->len--;
+		raw_dump(level, frm);
+	}
+}
+
+void rfcomm_dump(int level, struct frame *frm)
+{
+	uint8_t hdr_size, ctr_type;
+	short_frame_head *short_head_p = (void *) frm->ptr;
+	long_frame_head head;
+
+	if (short_head_p->length.ea == EA) {
+		head.addr       = short_head_p->addr;
+		head.control    = short_head_p->control;
+		head.length.bits.len = short_head_p->length.len;
+		hdr_size = sizeof(short_frame_head);
+	} else {
+		head = *(long_frame_head *) frm->ptr;
+		head.length.val = le16toh(head.length.val);
+		hdr_size = sizeof(long_frame_head);
+	}
+
+	frm->ptr += hdr_size;
+	frm->len -= hdr_size;
+
+	ctr_type = CLR_PF(head.control);
+
+	if (ctr_type == UIH) {
+		uih_frame(level, frm, &head); 
+	} else {
+		p_indent(level, frm); 
+		printf("RFCOMM(s): ");
+
+		switch (ctr_type) {
+		case SABM:
+			printf("SABM: ");
+			break;
+		case UA:
+			printf("UA: ");
+			break;
+		case DM:
+			printf("DM: ");
+			break;
+		case DISC:
+			printf("DISC: ");
+			break;
+		default:
+			printf("ERR: ");
+		}
+		print_rfcomm_hdr(&head, frm->ptr, frm->len);
+		printf("\n");
+	}
+}

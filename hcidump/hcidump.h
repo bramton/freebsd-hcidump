@@ -1,0 +1,45 @@
+/* 
+	HCIDump - HCI packet analyzer	
+	Copyright (C) 2000-2001 Maxim Krasnyansky <maxk@qualcomm.com>
+
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License version 2 as
+	published by the Free Software Foundation;
+
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD PARTY RIGHTS.
+	IN NO EVENT SHALL THE COPYRIGHT HOLDER(S) AND AUTHOR(S) BE LIABLE FOR ANY CLAIM,
+	OR ANY SPECIAL INDIRECT OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES WHATSOEVER
+	RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT,
+	NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE
+	USE OR PERFORMANCE OF THIS SOFTWARE.
+
+	ALL LIABILITY, INCLUDING LIABILITY FOR INFRINGEMENT OF ANY PATENTS, COPYRIGHTS,
+	TRADEMARKS OR OTHER RIGHTS, RELATING TO USE OF THIS SOFTWARE IS DISCLAIMED.
+*/
+
+/*
+ * $Id: hcidump.h,v 1.3 2003/09/12 23:38:06 max Exp $
+ */
+
+#define VERSION "1.5"
+
+/* Modes */
+enum {
+	PARSE,
+	READ,
+	WRITE
+};
+
+struct dump_hdr {
+	u_int16_t	len;
+	u_int8_t	in;
+	u_int8_t	pad;
+	u_int32_t	ts_sec;
+	u_int32_t   ts_usec;
+} __attribute__ ((packed));
+#define DUMP_HDR_SIZE (sizeof(struct dump_hdr))
+
+#define SNAP_LEN NG_HCI_ACL_PKT_SIZE
+

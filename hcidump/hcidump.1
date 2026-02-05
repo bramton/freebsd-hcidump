@@ -1,0 +1,76 @@
+.Dd November, 12 2002
+.Dt HCIDUMP 1
+.Os
+.Sh NAME
+.Nm hcidump
+.Nd Parse HCI data
+.Sh SYNOPSIS
+.Nm
+.Op Fl h
+.Nm
+.Op Fl aRtx
+.Op Fl i Ar HCI_node
+.Op Fl p Ar PSM
+.Op Fl r Ar file
+.Op Fl s Ar length
+.Op Fl w Ar file
+.Op filter
+.Sh DESCRIPTION
+.Nm
+reads raw HCI data coming from and going to a Bluetooth device (which can be
+specified with the option
+.Fl i ,
+default is all available devices) and prints to screen commands, events and
+data in a human-readable form.
+Optionally, the dump can be written to a file rather than parsed, and the dump 
+file can be parsed in a subsequent moment.
+.Sh OPTIONS
+.Bl -tag -width Ds
+.It Fl a
+For every packet, not only is the packet type displayed, but also all data
+in ASCII format.
+.It Fl h
+Prints usage info and exits.
+.It Fl i Ar HCI_node
+Data is read from the specified device.
+If not specified, and if
+.Fl r
+option is not set, data is read from the all available Bluetooth devices.
+.It Fl p Ar PSM
+Sets default Protocol Service Multiplexer (PSM) to specified value.
+.It Fl R
+Raw mode: do not display packet type, only data.
+.It Fl r Ar file
+Data is not read from a Bluetooth device, but from the specified file.
+The file can be created with option
+.Fl w .
+.It Fl s Ar length
+Sets max length of processed packets.
+.It Fl t
+Prepend a time stamp to every packet.
+.It Fl w Ar file
+Parsed output is not printed to screen, instead data read from the device are
+saved into the specified file.
+The saved dump file can be subsequently parsed with option
+.Fl r .
+.It Fl x
+For every packet, not only is the packet type displayed, but also all data
+in hex format.
+.El
+.Sh FILTERS
+Filter is a space-separated list of packet categories: available categories are
+.Cm bnep ,
+.Cm cmtp ,
+.Cm hci ,
+.Cm hidp ,
+.Cm l2cap ,
+.Cm rfcomm ,
+.Cm sco
+and
+.Cm sdp .
+If filters are used, only packets belonging to the specified categories are
+dumped.
+By default, all packets are dumped.
+.Sh AUTHORS
+.An Maxim Krasnyansky Aq maxk@qualcomm.com
+.An Fabrizio Gennari Aq fabrizio.gennari@philips.com

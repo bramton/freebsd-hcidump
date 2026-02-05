@@ -1,0 +1,41 @@
+ver 1.5:
+	Included man page for hcidump.
+	Minor fix for HCI grabber.
+
+ver 1.4:
+	CMTP parser support.
+	Various fixes for SDP, RFCOMM and BNEP parsers.
+
+ver 1.3:
+	RFCOMM and BNEP parser fixes.
+	Use getopt_long instead of argp.
+	Added --psm option.
+	Automake build environment.
+	Other minor fixes.
+
+ver 1.2:
+	BNEP support.
+	Correct filter initialization.
+	Minor fixes.
+
+ver 1.1:
+	SCO support. 
+	Support for frame time stamps.
+	RAW mode and other minor fixes.
+
+ver 1.0:
+	L2CAP fragment reassembly.
+	RFCOMM parser (Wayne Lee).
+	SDP parser (Ricky Yuen). 
+	Simple filtering.
+
+ver 0.2:
+	L2CAP parsing. PSM tracking.
+	HCI events and commands parsing.
+	Packet parser moved to unified library (libparser).
+	HCI socket filter support.
+	Improved command line option parsing.
+	Improved output format.
+
+ver 0.1:
+	Initial implementation.
