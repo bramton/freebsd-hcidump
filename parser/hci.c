@@ -408,11 +408,19 @@ char *cmd_status_map[] = {
 	"Unknown",
 	"Read Failed Contact Counter",
 	"Reset Failed Contact Counter",
-	"Get Link Quality",
+	"Read Link Quality",
 	"Unknown",
-	"Read RSSI"
+	"Read RSSI",
+	"Read AFH Channel Map",
+	"Read Clock",
+	"Read Encryption Key Size",
+	"Unknown",
+	"Unknown", /* 0x000a */
+	"Unknown",    
+	"Get MWS Transport Layer Configuration",
+	"Set Triggered Clock Capture"
 };
-#define CMD_STATUS_NUM 5
+#define CMD_STATUS_NUM 13
 
 static void command_dump(int level, struct frame *frm)
 {
