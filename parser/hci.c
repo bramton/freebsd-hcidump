@@ -242,12 +242,16 @@ char *cmd_linkpol_map[] = {
 	"QoS Setup",
 	"Unknown",
 	"Role Discovery",
-	"Unknown",
+	"Unknown", /* 0x000a */
 	"Switch Role",
 	"Read Link Policy Settings",
-	"Write Link Policy Settings"
+	"Write Link Policy Settings",
+	"Read Default Link Policy Settings",
+	"Write Default Link Policy Settings",
+	"Flow Specification", /* 0x0010 */
+	"Sniff Subrating"
 };
-#define CMD_LINKPOL_NUM 13
+#define CMD_LINKPOL_NUM 17
 
 char *cmd_hostctl_map[] = {
 	"Unknown",
