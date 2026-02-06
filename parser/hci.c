@@ -68,6 +68,66 @@ char *event_map[] = {
 };
 #define EVENT_NUM	32
 
+char *event_map_le[] = {
+	"LE Unknown",
+	"LE Connection Complete", /* 0x01 */
+	"LE Advertising Report",
+	"LE Connection Update Complete",
+	"LE Read Remote Features Page0 Complete",
+	"LE Long Term Key Request",
+	"LE Remote Connection Parameter Request",
+	"LE Data Length Change",
+	"LE Read Local P256 Public Key Complete",
+	"LE Generate DHKey Complete",
+	"LE Enhanced Connection Complete v1", /* 0x0a */
+	"LE Directed Advertising Report ",
+	"LE PHY Update Complete",
+	"LE Extended Advertising Report",
+	"LE Periodic Advertising Sync Established v1",
+	"LE Periodic Advertising Report v1",
+	"LE Periodic Advertising Sync Lost", /* 0x10 */
+	"LE Scan Timeout",
+	"LE Advertising Set Terminated",
+	"LE Scan Request Received",
+	"LE Channel Selection Algorithm",
+	"LE Connectionless IQ Report",
+	"LE Connection IQ Report",
+	"LE CTE Request Failed",
+	"LE Periodic Advertising Sync Transfer Received v1",
+	"LE CIS Established",
+	"LE CIS Request", /* 0x1a */
+	"LE Create BIG Complete",
+	"LE Terminate BIG Complete",
+	"LE BIG Sync Established",
+	"LE BIG Sync Lost",
+	"LE Request Peer SCA Complete",
+	"LE Path Loss Threshold", /* 0x20 */
+	"LE Transmit Power Reporting",
+	"LE BIGInfo Advertising Report",
+	"LE Subrate Change",
+	"LE Periodic Advertising Sync Established v2",
+	"LE Periodic Advertising Report v2",
+	"LE Periodic Advertising Sync Transfer Received v2",
+	"LE Periodic Advertising Subevent Data Request",
+	"LE Periodic Advertising Response Report",
+	"LE Enhanced Connection Complete v2",
+	"LE CIS Established v2", /* 0x2a */
+	"LE Read All Remote Features Complete",
+	"LE CS Read Remote Supported Capabilities Complete",
+	"LE CS Read Remote FAE Table Complete",
+	"LE CS Security Enable Complete",
+	"LE CS Config Complete",
+	"LE CS Procedure Enable Complete", /* 0x30 */
+	"LE CS Subevent Result",
+	"LE CS Subevent Result Continue",
+	"LE CS Test End Complete",
+	"LE Monitored Advertisers Report",
+	"LE Frame Space Update Complete",
+	"LE UTP Receive",
+	"LE Connection Rate Change"
+};
+#define EVENT_LE_NUM	55
+
 char *cmd_linkctl_map[] = {
 	"Unknown",
 	"Inquiry",
