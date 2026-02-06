@@ -33,7 +33,7 @@
 
 char *event_map[] = {
 	"Unknown",
-	"Inquiry Complete",
+	"Inquiry Complete", /* 0x01 */
 	"Inquiry Result",
 	"Connect Complete",
 	"Connect Request",
@@ -42,13 +42,13 @@ char *event_map[] = {
 	"Remote Name Req Complete",
 	"Encrypt Change",
 	"Change Connection Link Key Complete",
-	"Master Link Key Complete",
+	"Master Link Key Complete", /* 0x0a */
 	"Read Remote Supported Features",
 	"Read Remote Ver Info Complete",
 	"QoS Setup Complete",
 	"Command Complete",
 	"Command Status",
-	"Hardware Error",
+	"Hardware Error", /* 0x10 */
 	"Flush Occurred",
 	"Role Change",
 	"Number of Completed Packets",
@@ -58,15 +58,44 @@ char *event_map[] = {
 	"Link Key Request",
 	"Link Key Notification",
 	"Loopback Command",
-	"Data Buffer Overflow",
+	"Data Buffer Overflow", /* 0x1a */
 	"Max Slots Change",
 	"Read Clock Offset Complete",
 	"Connection Packet Type Changed",
 	"QoS Violation",
 	"Page Scan Mode Change",
-	"Page Scan Repetition Mode Change"
+	"Page Scan Repetition Mode Change", /* 0x20 */
+	"Flow Specification Complete",
+	"Inquiry Result with RSSI",
+	"Read Remote Extended Features Complete",
+	"Unknown",
+	"Unknown",
+	"Unknown",
+	"Unknown",
+	"Unknown",
+	"Unknown",
+	"Unknown", /* 0x2a */
+	"Unknown",
+	"Synchronous Connection Complete",
+	"Synchronous Connection Changed",
+	"Sniff Subrating",
+	"Extended Inquiry Result",
+	"Encryption Key Refresh Complete", /* 0x30 */
+	"IO Capability Request",
+	"IO Capability Response",
+	"User Confirmation Request",
+	"User Passkey Request",
+	"Remote OOB Data Request",
+	"Simple Pairing Complete",
+	"Unknown",
+	"Link Supervision Timeout Changed",
+	"Enhanced Flush Complete",
+	"Unknown", /* 0x3a */
+	"User Passkey Notification",
+	"Keypress Notification",
+	"Remote Host Supported Features Notification"
 };
-#define EVENT_NUM	32
+#define EVENT_NUM	61
 
 char *event_map_le[] = {
 	"LE Unknown",
