@@ -190,8 +190,46 @@ char *cmd_linkctl_map[] = {
 	"Read Remote Version Information",
 	"Unknown",
 	"Read Clock offset"
+	"Read LMP Handle", /* 0x0020 */
+	"Unknown",
+	"Unknown",
+	"Unknown",
+	"Unknown",
+	"Unknown",
+	"Unknown",
+	"Unknown",
+	"Setup Synchronous Connection",
+	"Accept Synchronous Connection Request",
+	"Reject Synchronous Connection Request", /* 0x002a */
+	"IO Capability Request Reply",
+	"User Confirmation Request Reply",
+	"User Confirmation Request Negative Reply",
+	"User Passkey Request Reply",
+	"User Passkey Request Negative Reply",
+	"Remote OOB Data Request Reply", /* 0x0030 */
+	"Unknown",
+	"Unknown",
+	"Remote OOB Data Request Negative Reply",
+	"IO Capability Request Negative Reply",
+	"Unknown",
+	"Unknown",
+	"Unknown",
+	"Unknown",
+	"Unknown",
+	"Unknown", /* 0x003a */
+	"Unknown",
+	"Unknown",
+	"Enhanced Setup Synchronous Connection",
+	"Enhanced Accept Synchronous Connection Request",
+	"Truncated Page",
+	"Truncated Page Cancel", /* 0x0040 */
+	"Set Connectionless Peripheral Broadcast",
+	"Set Connectionless Peripheral Broadcast Receive",
+	"Start Synchronization Train",
+	"Receive Synchronization Train",
+	"Remote OOB Extended Data Request Reply"
 };
-#define CMD_LINKCTL_NUM	31
+#define CMD_LINKCTL_NUM	69
 
 char *cmd_linkpol_map[] = {
 	"Unknown",
