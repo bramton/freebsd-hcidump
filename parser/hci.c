@@ -312,13 +312,77 @@ char *cmd_hostctl_map[] = {
 	"Write Link Supervision Timeout",
 	"Read Number of Supported IAC",
 	"Read Current IAC LAP",
-	"Write Current IAC LAP",
+	"Write Current IAC LAP", /* 0x003a */
 	"Read Page Scan Period Mode",
 	"Write Page Scan Period Mode",
 	"Read Page Scan Mode",
-	"Write Page Scan Mode"
+	"Write Page Scan Mode",
+	"Set AFH Host Channel Classification",    
+	"Unknown", /* 0x0040 */
+	"Unknown",
+	"Read Inquiry Scan Type",
+	"Write Inquiry Scan Type",
+	"Read Inquiry Mode",
+	"Write Inquiry Mode",
+	"Read Page Scan Type",
+	"Write Page Scan Type",
+	"Read AFH Channel Assessment Mode",
+	"Write AFH Channel Assessment Mode",
+	"Unknown", /* 0x0050 */
+	"Read Extended Inquiry Response",
+	"Write Extended Inquiry Response",
+	"Refresh Encryption Key",
+	"Unknown",
+	"Read Simple Pairing Mode",
+	"Write Simple Pairing Mode",
+	"Read Local OOB Data",
+	"Read Inquiry Response Transmit Power Level",
+	"Write Inquiry Transmit Power Level",
+	"Read Default Erroneous Data Reporting", /* 0x005a */
+	"Write Default Erroneous Data Reporting",
+	"Unknown",
+	"Unknown",
+	"Unknown",
+	"Enhanced Flush",
+	"Send Keypress Notification", /* 0x0060 */
+	"Unknown",
+	"Unknown",
+	"Set Event Mask Page2",
+	"Unknown",
+	"Unknown",
+	"Read Flow Control Mode",
+	"Write Flow Control Mode",
+	"Read Enhanced Transmit Power Level",
+	"Unknown",
+	"Unknown", /* 0x006a */
+	"Unknown",
+	"Read LE Host Support",
+	"Write LE Host Support",
+	"Set MWS Channel Parameters",
+	"Set External Frame Configuration",
+	"Set MWS Signaling", /* 0x0070 */
+	"Set MWS Transport Layer",
+	"Set MWS Scan Frequency Table",
+	"Set MWS_PATTERN Configuration",
+	"Set Reserved LT_ADDR",
+	"Delete Reserved LT_ADDR",
+	"Set Connectionless Peripheral Broadcast Data",
+	"Read Synchronization Train Parameters",
+	"Write Synchronization Train Parameters",
+	"Read Secure Connections Host Support",
+	"Write Secure Connections Host Support", /* 0x007a */
+	"Read Authenticated Payload Timeout",
+	"Write Authenticated Payload Timeout",
+	"Read Local OOB Extended Data",
+	"Read Extended Page Timeout",
+	"Write Extended Page Timeout",
+	"Read Extended Inquiry Length", /* 0x0080 */
+	"Write Extended Inquiry Length",
+	"Set Ecosystem Base Interval",
+	"Configure Data Path",
+	"Set Min Encryption Key Size"
 };
-#define CMD_HOSTCTL_NUM 62
+#define CMD_HOSTCTL_NUM 126
 
 char *cmd_info_map[] = {
 	"Unknown",
