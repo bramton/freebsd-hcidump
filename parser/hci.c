@@ -64,9 +64,38 @@ char *event_map[] = {
 	"Connection Packet Type Changed",
 	"QoS Violation",
 	"Page Scan Mode Change",
-	"Page Scan Repetition Mode Change"
+	"Page Scan Repetition Mode Change", /* 0x20 */
+	"Flow Specification Complete",
+	"Inquiry Result with RSSI",
+	"Read Remote Extended Features Complete",
+	"Unknown",
+	"Unknown",
+	"Unknown",
+	"Unknown",
+	"Unknown",
+	"Unknown",
+	"Unknown", /* 0x2a */
+	"Unknown",
+	"Synchronous Connection Complete",
+	"Synchronous Connection Changed",
+	"Sniff Subrating",
+	"Extended Inquiry Result",
+	"Encryption Key Refresh Complete", /* 0x30 */
+	"IO Capability Request",
+	"IO Capability Response",
+	"User Confirmation Request",
+	"User Passkey Request",
+	"Remote OOB Data Request",
+	"Simple Pairing Complete",
+	"Unknown",
+	"Link Supervision Timeout Changed",
+	"Enhanced Flush Complete",
+	"Unknown", /* 0x3a */
+	"User Passkey Notification",
+	"Keypress Notification",
+	"Remote Host Supported Features Notification"
 };
-#define EVENT_NUM	32
+#define EVENT_NUM	61
 
 char *event_map_le[] = {
 	"LE Unknown",
