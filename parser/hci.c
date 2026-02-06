@@ -410,7 +410,7 @@ char *cmd_status_map[] = {
 	"Reset Failed Contact Counter",
 	"Read Link Quality",
 	"Unknown",
-	"Read RSSI"
+	"Read RSSI",
 	"Read AFH Channel Map",
 	"Read Clock",
 	"Read Encryption Key Size",
