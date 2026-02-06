@@ -387,16 +387,22 @@ char *cmd_hostctl_map[] = {
 char *cmd_info_map[] = {
 	"Unknown",
 	"Read Local Version Information",
-	"Unknown",
+	"Read Local Supported Commands",
 	"Read Local Supported Features",
-	"Unknown",
+	"Read Local Extended Features",
 	"Read Buffer Size",
 	"Unknown",
 	"Read Country Code",
 	"Unknown",
-	"Read BD ADDR"
+	"Read BD ADDR",
+	"Read Data Block Size", /* 0x000a */
+	"Read Local Supported Codecs v1",
+	"Read Local Simple Pairing Options",
+	"Read Local Supported Codecs v2",
+	"Read Local Supported Codec Capabilities",
+	"Read Local Supported Controller Delay"
 };
-#define CMD_INFO_NUM 9
+#define CMD_INFO_NUM 15
 
 char *cmd_status_map[] = {
 	"Unknown",
