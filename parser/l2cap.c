@@ -19,11 +19,6 @@
 	TRADEMARKS OR OTHER RIGHTS, RELATING TO USE OF THIS SOFTWARE IS DISCLAIMED.
 */
 
-/*
- * Id: l2cap.c,v 1.20 2003/09/07 16:21:48 holtmann Exp
- * $Id: l2cap.c,v 1.5 2003/09/12 23:38:11 max Exp $
- */
-
 #include <sys/types.h>
 #include <sys/endian.h>
 #include <netgraph/bluetooth/include/ng_hci.h>

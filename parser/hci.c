@@ -19,11 +19,6 @@
 	TRADEMARKS OR OTHER RIGHTS, RELATING TO USE OF THIS SOFTWARE IS DISCLAIMED.
 */
 
-/*
- * Id: hci.c,v 1.14 2002/12/21 19:22:21 holtmann Exp
- * $Id: hci.c,v 1.5 2003/09/12 23:38:11 max Exp $
- */
-
 #include <sys/types.h>
 #include <sys/endian.h>
 #include <netgraph/bluetooth/include/ng_hci.h>
@@ -33,7 +28,7 @@
 
 char *event_map[] = {
 	"Unknown",
-	"Inquiry Complete",
+	"Inquiry Complete", /* 0x01 */
 	"Inquiry Result",
 	"Connect Complete",
 	"Connect Request",
@@ -42,13 +37,13 @@ char *event_map[] = {
 	"Remote Name Req Complete",
 	"Encrypt Change",
 	"Change Connection Link Key Complete",
-	"Master Link Key Complete",
+	"Master Link Key Complete", /* 0x0a */
 	"Read Remote Supported Features",
 	"Read Remote Ver Info Complete",
 	"QoS Setup Complete",
 	"Command Complete",
 	"Command Status",
-	"Hardware Error",
+	"Hardware Error", /* 0x10 */
 	"Flush Occurred",
 	"Role Change",
 	"Number of Completed Packets",
@@ -58,7 +53,7 @@ char *event_map[] = {
 	"Link Key Request",
 	"Link Key Notification",
 	"Loopback Command",
-	"Data Buffer Overflow",
+	"Data Buffer Overflow", /* 0x1a */
 	"Max Slots Change",
 	"Read Clock Offset Complete",
 	"Connection Packet Type Changed",
@@ -623,6 +618,13 @@ static void command_dump(int level, struct frame *frm)
 			cmd = "Unknown";
 		break;
 
+	case NG_HCI_OGF_LE:
+		if (ocf <= CMD_LINKCTL_LE_NUM)
+			cmd = cmd_linkctl_le_map[ocf];
+		else
+			cmd = "Unknown";
+		break;
+
 	case NG_HCI_OGF_LINK_POLICY:
 		if (ocf <= CMD_LINKPOL_NUM)
 			cmd = cmd_linkpol_map[ocf];
@@ -677,6 +679,11 @@ static void event_dump(int level, struct frame *frm)
 		printf("HCI Event: Testing(0x%2.2x) plen %d\n", hdr->event, hdr->length);
 	else if (hdr->event == NG_HCI_EVENT_VENDOR)
 		printf("HCI Event: Vendor(0x%2.2x) plen %d\n", hdr->event, hdr->length);
+	else if (hdr->event == NG_HCI_EVENT_LE) {
+		ng_hci_le_ep *lep = (ng_hci_le_ep *)(hdr + 1);
+		printf("HCI Event: %s(0x%2.2x) plen %d\n",
+			event_map_le[lep->subevent_code], lep->subevent_code, hdr->length - 1);
+	}
 	else
 		printf("HCI Event: code 0x%2.2x plen %d\n", hdr->event, hdr->length);
 

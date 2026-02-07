@@ -27,11 +27,6 @@
 	Copyright (C) 2001 Ricky Yuen <ryuen@qualcomm.com>
 */
 
-/*
- *  Id: sdp.h,v 1.6 2003/06/10 11:06:03 holtmann Exp
- *  $Id: sdp.h,v 1.2 2003/08/16 22:05:30 max Exp $
- */
-
 #ifndef __SDP_H
 #define __SDP_H
 

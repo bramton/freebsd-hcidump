@@ -19,11 +19,10 @@
 	TRADEMARKS OR OTHER RIGHTS, RELATING TO USE OF THIS SOFTWARE IS DISCLAIMED.
 */
 
-/*
- * $Id: hcidump.h,v 1.3 2003/09/12 23:38:06 max Exp $
- */
+#ifndef _HCIDUMP_H
+#define _HCIDUMP_H
 
-#define VERSION "1.5"
+#define VERSION "1.5.1"
 
 /* Modes */
 enum {
@@ -43,3 +42,4 @@ struct dump_hdr {
 
 #define SNAP_LEN NG_HCI_ACL_PKT_SIZE
 
+#endif /* _HCIDUMP_H */

@@ -19,11 +19,6 @@
 	TRADEMARKS OR OTHER RIGHTS, RELATING TO USE OF THIS SOFTWARE IS DISCLAIMED.
 */
 
-/*
- * Id: hcidump.c,v 1.30 2003/09/07 16:21:48 holtmann Exp
- * $Id: hcidump.c,v 1.9 2004/03/03 18:52:10 max Exp $
- */
-
 #include <sys/types.h>
 #include <sys/endian.h>
 #include <sys/socket.h>
@@ -36,6 +31,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#define L2CAP_SOCKET_CHECKED
 
 #include <netgraph/bluetooth/include/ng_hci.h>
 #include <netgraph/bluetooth/include/ng_l2cap.h>
