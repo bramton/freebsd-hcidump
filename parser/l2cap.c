@@ -293,7 +293,7 @@ static void l2cap_parse(int level, struct frame *frm)
 	frm->ptr += sizeof(*hdr);
 	frm->len -= sizeof(*hdr);
 
-	if (cid == 0x1) {
+	if (cid == NG_L2CAP_SIGNAL_CID) {
 		/* Signaling channel */
 
 		while (frm->len >= sizeof(ng_l2cap_cmd_hdr_t)) {
@@ -362,7 +362,7 @@ static void l2cap_parse(int level, struct frame *frm)
 			frm->ptr += le16toh(hdr->length);
 			frm->len -= le16toh(hdr->length);
 		}
-	} else if (cid == 0x2) {
+	} else if (cid == NG_L2CAP_CLT_CID) {
 		/* Connectionless channel */
 
 		if (p_filter(FILT_L2CAP))
