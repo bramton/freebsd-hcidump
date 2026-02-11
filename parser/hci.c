@@ -618,6 +618,13 @@ static void command_dump(int level, struct frame *frm)
 			cmd = "Unknown";
 		break;
 
+	case NG_HCI_OGF_LE:
+		if (ocf <= CMD_LINKCTL_LE_NUM)
+			cmd = cmd_linkctl_le_map[ocf];
+		else
+			cmd = "Unknown";
+		break;
+
 	case NG_HCI_OGF_LINK_POLICY:
 		if (ocf <= CMD_LINKPOL_NUM)
 			cmd = cmd_linkpol_map[ocf];
@@ -672,6 +679,11 @@ static void event_dump(int level, struct frame *frm)
 		printf("HCI Event: Testing(0x%2.2x) plen %d\n", hdr->event, hdr->length);
 	else if (hdr->event == NG_HCI_EVENT_VENDOR)
 		printf("HCI Event: Vendor(0x%2.2x) plen %d\n", hdr->event, hdr->length);
+	else if (hdr->event == NG_HCI_EVENT_LE) {
+		ng_hci_le_ep *lep = (ng_hci_le_ep *)(hdr + 1);
+		printf("HCI Event: %s(0x%2.2x) plen %d\n",
+			event_map_le[lep->subevent_code], lep->subevent_code, hdr->length - 1);
+	}
 	else
 		printf("HCI Event: code 0x%2.2x plen %d\n", hdr->event, hdr->length);
 
