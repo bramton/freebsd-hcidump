@@ -22,7 +22,7 @@
 #ifndef _HCIDUMP_H
 #define _HCIDUMP_H
 
-#define VERSION "1.5"
+#define VERSION "1.5.2"
 
 /* Modes */
 enum {
@@ -42,3 +42,4 @@ struct dump_hdr {
 
 #define SNAP_LEN NG_HCI_ACL_PKT_SIZE
 
+#endif /* _HCIDUMP_H */
