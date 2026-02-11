@@ -19,15 +19,10 @@
 	TRADEMARKS OR OTHER RIGHTS, RELATING TO USE OF THIS SOFTWARE IS DISCLAIMED.
 */
 
-/* 	
+/* 
 	CMTP parser.
 	Copyright (C) 2002 Marcel Holtmann <marcel@holtmann.org>
 */
-
-/*
- * Id: cmtp.c,v 1.2 2002/12/08 00:37:07 holtmann Exp
- * $Id: cmtp.c,v 1.3 2003/09/12 23:38:11 max Exp $
- */
 
 #include <sys/types.h>
 #include <stdio.h>

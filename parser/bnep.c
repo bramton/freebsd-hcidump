@@ -24,11 +24,6 @@
 	Copyright (C) 2002 Takashi Sasai <sasai@sm.sony.co.jp>
 */
 
-/*
- * Id: bnep.c,v 1.4 2002/12/08 00:37:07 holtmann Exp
- * $Id: bnep.c,v 1.4 2003/09/12 23:38:11 max Exp $
- */
-
 #include <sys/types.h>
 #include <stdio.h>
 

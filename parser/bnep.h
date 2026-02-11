@@ -24,11 +24,6 @@
 	Copyright (C) 2002 Takashi Sasai <sasai@sm.sony.co.jp>
 */
 
-/*
- * Id: bnep.h,v 1.1 2002/03/12 18:48:33 maxk Exp 
- * $Id: bnep.h,v 1.2 2003/08/16 22:05:29 max Exp $
- */
-
 #ifndef __BNEP_H
 #define __BNEP_H
 

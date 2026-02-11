@@ -19,11 +19,6 @@
    TRADEMARKS OR OTHER RIGHTS, RELATING TO USE OF THIS SOFTWARE IS DISCLAIMED.
 */
 
-/*
- * Id: parser.c,v 1.14 2002/12/08 00:37:07 holtmann Exp 
- * $Id: parser.c,v 1.4 2003/09/12 23:38:11 max Exp $
- */
-
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <ctype.h>

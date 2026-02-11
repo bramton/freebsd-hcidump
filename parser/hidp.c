@@ -24,11 +24,6 @@
 	Copyright (C) 2003 Marcel Holtmann <marcel@holtmann.org>
 */
 
-/*
- * Id: hidp.c,v 1.2 2003/12/10 15:17:33 holtmann Exp
- * $Id: hidp.c,v 1.2 2004/02/17 22:32:40 max Exp $
- */
-
 #include <sys/types.h>   
 #include <stdio.h>
 

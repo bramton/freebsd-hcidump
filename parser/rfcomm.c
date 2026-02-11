@@ -24,11 +24,6 @@
 	Copyright (C) 2001 Wayne Lee <waynelee@qualcomm.com>
 */
 
-/*
- * Id: rfcomm.c,v 1.6 2002/12/08 00:37:07 holtmann Exp 
- * $Id: rfcomm.c,v 1.4 2003/09/12 23:38:11 max Exp $
- */
-
 #include <sys/types.h>
 #include <sys/endian.h>
 #include <stdio.h>

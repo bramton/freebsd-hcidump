@@ -19,11 +19,6 @@
 	TRADEMARKS OR OTHER RIGHTS, RELATING TO USE OF THIS SOFTWARE IS DISCLAIMED.
 */
 
-/*
- * Id: hci.c,v 1.14 2002/12/21 19:22:21 holtmann Exp
- * $Id: hci.c,v 1.5 2003/09/12 23:38:11 max Exp $
- */
-
 #include <sys/types.h>
 #include <sys/endian.h>
 #include <netgraph/bluetooth/include/ng_hci.h>

@@ -24,11 +24,6 @@
 	Copyright (C) 2001 Ricky Yuen <ryuen@qualcomm.com>
 */
 
-/*
- * Id: sdp.c,v 1.22 2003/09/01 15:09:06 jscrane Exp
- * $Id: sdp.c,v 1.8 2004/12/14 18:45:45 max Exp $
- */
-
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <inttypes.h>
