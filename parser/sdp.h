@@ -1,4 +1,6 @@
 /* 
+   SPDX-License-Identifier: GPL-2.0-only
+
    BlueZ - Bluetooth protocol stack for Linux
    Copyright (C) 2000-2001 Qualcomm Incorporated
 

@@ -1,5 +1,7 @@
 /* 
-   HCIDump - HCI packet analyzer	
+   SPDX-License-Identifier: GPL-2.0-only
+
+   HCIDump - HCI packet analyzer
    Copyright (C) 2000-2001 Maxim Krasnyansky <maxk@qualcomm.com>
 
    This program is free software; you can redistribute it and/or modify
