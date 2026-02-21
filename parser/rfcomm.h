@@ -1,5 +1,7 @@
 /* 
-	HCIDump - HCI packet analyzer	
+	SPDX-License-Identifier: GPL-2.0-only
+
+	HCIDump - HCI packet analyzer
 	Copyright (C) 2000-2001 Maxim Krasnyansky <maxk@qualcomm.com>
 
 	This program is free software; you can redistribute it and/or modify
@@ -19,15 +21,10 @@
 	TRADEMARKS OR OTHER RIGHTS, RELATING TO USE OF THIS SOFTWARE IS DISCLAIMED.
 */
 
-/* 	
+/* 
 	RFCOMM parser.
 	Copyright (C) 2001 Wayne Lee <waynelee@qualcomm.com>
 */
-
-/*
- * Id: rfcomm.h,v 1.3 2002/12/08 00:37:07 holtmann Exp 
- * $Id: rfcomm.h,v 1.2 2003/08/16 22:05:30 max Exp $
- */
 
 #define RFCOMM_PSM 	3
 

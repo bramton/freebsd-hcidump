@@ -1,11 +1,13 @@
 /* 
-   HCIDump - HCI packet analyzer	
+   SPDX-License-Identifier: GPL-2.0-only
+
+   HCIDump - HCI packet analyzer
    Copyright (C) 2000-2001 Maxim Krasnyansky <maxk@qualcomm.com>
-   
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License version 2 as
    published by the Free Software Foundation;
-   
+
    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
    OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD PARTY RIGHTS.
@@ -14,15 +16,10 @@
    RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT,
    NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE
    USE OR PERFORMANCE OF THIS SOFTWARE.
-   
+
    ALL LIABILITY, INCLUDING LIABILITY FOR INFRINGEMENT OF ANY PATENTS, COPYRIGHTS,
    TRADEMARKS OR OTHER RIGHTS, RELATING TO USE OF THIS SOFTWARE IS DISCLAIMED.
 */
-
-/*
- * Id: parser.h,v 1.21 2003/09/07 16:21:48 holtmann Exp
- * $Id: parser.h,v 1.4 2003/09/12 23:38:11 max Exp $
- */
 
 struct frame {
 	void	*data;

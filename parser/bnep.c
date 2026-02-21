@@ -1,5 +1,7 @@
-/* 
-   HCIDump - HCI packet analyzer	
+/*
+   SPDX-License-Identifier: GPL-2.0-only
+
+   HCIDump - HCI packet analyzer
    Copyright (C) 2000-2001 Maxim Krasnyansky <maxk@qualcomm.com>
 
    This program is free software; you can redistribute it and/or modify
@@ -23,11 +25,6 @@
 	BNEP parser.
 	Copyright (C) 2002 Takashi Sasai <sasai@sm.sony.co.jp>
 */
-
-/*
- * Id: bnep.c,v 1.4 2002/12/08 00:37:07 holtmann Exp
- * $Id: bnep.c,v 1.4 2003/09/12 23:38:11 max Exp $
- */
 
 #include <sys/types.h>
 #include <stdio.h>

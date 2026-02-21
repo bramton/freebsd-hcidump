@@ -1,5 +1,7 @@
 /* 
-   HCIDump - HCI packet analyzer	
+   SPDX-License-Identifier: GPL-2.0-only
+
+   HCIDump - HCI packet analyzer
    Copyright (C) 2000-2001 Maxim Krasnyansky <maxk@qualcomm.com>
 
    This program is free software; you can redistribute it and/or modify
@@ -23,11 +25,6 @@
 	SDP parser.
 	Copyright (C) 2001 Ricky Yuen <ryuen@qualcomm.com>
 */
-
-/*
- * Id: sdp.c,v 1.22 2003/09/01 15:09:06 jscrane Exp
- * $Id: sdp.c,v 1.8 2004/12/14 18:45:45 max Exp $
- */
 
 #include <sys/types.h>
 #include <netinet/in.h>
