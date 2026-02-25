@@ -30,6 +30,8 @@
 #include <stdlib.h>
 
 #include "parser.h"
+#include "smp.h"
+#include "att.h"
 
 typedef struct {
 	uint16_t handle;
@@ -376,6 +378,19 @@ static void l2cap_parse(int level, struct frame *frm)
 		p_indent(level, frm);
 		printf("L2CAP(c): cid 0x%x len %d psm %d\n", cid, dlen, psm);
 		raw_dump(level, frm);
+	
+	} else if (cid == NG_L2CAP_SMP_CID) {
+		if (p_filter(FILT_L2CAP))
+			return;
+		p_indent(level, frm);
+		printf("L2CAP(c): cid 0x%x len %d psm %d\n", cid, dlen, psm);
+		smp_dump(++level, frm);
+	} else if (cid == NG_L2CAP_ATT_CID) {
+		if (p_filter(FILT_L2CAP))
+			return;
+		p_indent(level, frm);
+		printf("L2CAP(c): cid 0x%x len %d psm %d\n", cid, dlen, psm);
+		att_dump(++level, frm);
 	} else {
 		/* Connection oriented channel */
 		uint16_t psm = get_psm(!frm->in, cid);

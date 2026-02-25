@@ -25,6 +25,7 @@
 #include <sys/endian.h>
 #include <netgraph/bluetooth/include/ng_hci.h>
 #include <stdio.h>
+#include "/home/bram/ble-bram/lepair/l2cap_smp.h"
 
 #include "parser.h"
 
@@ -674,9 +675,15 @@ static void event_dump(int level, struct frame *frm)
 
 	p_indent(level, frm);
 
-	if (hdr->event <= EVENT_NUM)
+	if (hdr->event <= EVENT_NUM) {
 		printf("HCI Event: %s(0x%2.2x) plen %d\n",
 			event_map[hdr->event], hdr->event, hdr->length);
+		if (hdr->event == NG_HCI_EVENT_COMMAND_STATUS) {
+			ng_hci_command_status_ep *ep = (ng_hci_command_status_ep *)(hdr + 1);
+			p_indent(level+1, frm);
+			printf("Status: %02x\n", ep->status);
+		}
+	}
 	else if (hdr->event == NG_HCI_EVENT_BT_LOGO)
 		printf("HCI Event: Testing(0x%2.2x) plen %d\n", hdr->event, hdr->length);
 	else if (hdr->event == NG_HCI_EVENT_VENDOR)

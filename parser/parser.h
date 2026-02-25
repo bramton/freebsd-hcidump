@@ -20,6 +20,11 @@
    ALL LIABILITY, INCLUDING LIABILITY FOR INFRINGEMENT OF ANY PATENTS, COPYRIGHTS,
    TRADEMARKS OR OTHER RIGHTS, RELATING TO USE OF THIS SOFTWARE IS DISCLAIMED.
 */
+#ifndef _PARSER_H_
+#define _PARSER_H_
+
+#include <sys/types.h>
+#include <stdio.h>
 
 struct frame {
 	void	*data;
@@ -98,3 +103,4 @@ void cmtp_dump(int level, struct frame *frm);
 void hidp_dump(int level, struct frame *frm);
 
 void parse(struct frame *frm);
+#endif /*  _PARSER_H_ */
